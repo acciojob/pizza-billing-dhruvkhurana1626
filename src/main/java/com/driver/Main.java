@@ -3,117 +3,44 @@ package com.driver;
 import java.util.Scanner;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args){
       Scanner sc = new Scanner(System.in);
 
-      //lets start by asking if the customer want normal or deluxe pizza
-      System.out.print("Welcome to Dhruv Pizza Shop\nWhat pizza do u like to have ? Press N for Normal and D for Deluxe ");
-      String pizzaChoice = sc.nextLine();
+      //First of all welcome the customer
+      System.out.print("Welcome to Pizza Shop\n");
 
-      //if customer chooses normal pizza
-      if(pizzaChoice.equalsIgnoreCase("n")){
+      //lets ask if the customer want Normal or Deluxe
+      System.out.print("What would u like to Have - N for Normal | D for Deluxe ");
+      String pizzaBase = sc.nextLine();
 
-          StringBuilder sb = new StringBuilder();
-          sb.append("\nBase Price for Normal ");
+      //last ask customer if they want veg or non veg
+      System.out.print("What Normal Pizza do u want - V for Veg | N for Non-veg ");
+      boolean check = false;
+      if(sc.nextLine().equalsIgnoreCase("v")) check = true;
 
-          System.out.print("Do u like to have Veg or Non veg, Press V for Veg and N for Non Veg ");
-          String checkvorn = sc.nextLine();
+      //lets create a object of what customer want - normal or delaux with veg or non veg type
+      Pizza p;
 
-          boolean check = checkvorn.equalsIgnoreCase("v");
-          //create a object of pizza
-          Pizza p = new Pizza(check);
-
-          if(check){
-              sb.append("Veg pizza is 300 Rs \n");
-              p.setPrice(300);
-          }
-          else{
-              sb.append("Non-Veg pizza is 400 Rs \n");
-              p.setPrice(400);
-          }
-
-          //lets ask customer if they wants extra cheese
-          System.out.print("Do u like to add Extra Cheese, Press Y for Yes and N for No ");
-          String extraC = sc.nextLine();
-
-          if(extraC.equalsIgnoreCase("Y")){
-              sb.append("added Extra Cheese of 80 Rs \n");
-              p.addExtraCheese();
-          }
-
-          //lets ask customer if they wants extra toppings
-          System.out.print("Do u like to add Extra Toppings, Press Y for Yes and N for No ");
-          String extraT = sc.nextLine();
-
-          if(extraT.equalsIgnoreCase("Y")){
-              if(check) sb.append("added Extra Topping of 70 Rs \n");
-              else sb.append("added Extra Topping of 120 Rs \n");
-              p.addExtraToppings();
-          }
-
-          //lets ask customer if he wants to eat it here or take it away
-          System.out.print("Do u like to Eat it here or TakeAway, Press H for Here and T for Takeaway ");
-          String decide = sc.nextLine();
-
-          if(decide.equalsIgnoreCase("T")){
-              sb.append("added Charges for Paper bag 20 Rs\n");
-              p.addTakeaway();
-          }
-
-          //lets generate the bill
-          System.out.println(sb+ "Your Final Bill is " + p.getBill());
+      if(pizzaBase.equalsIgnoreCase("N")) {
+          p = new Pizza(check);
       }
-
       else{
-          System.out.print("Do u like to have Veg or Non veg, Press V for Veg and N for Non Veg ");
-          String checkvorn = sc.nextLine();
-
-          StringBuilder dsb = new StringBuilder();
-          dsb.append("\nBase Price for Deluxe ");
-
-          boolean check = checkvorn.equalsIgnoreCase("v");
-          //create a object of pizza
-          DeluxePizza dp = new DeluxePizza(check);
-
-          if(check){
-              dsb.append("Veg pizza is 450 Rs \n");
-              dp.setPrice(450);
-          }
-          else{
-              dsb.append("Non-Veg pizza is 600 Rs \n");
-              dp.setPrice(600);
-          }
-
-          //lets ask customer if they wants extra cheese
-          System.out.print("Do u like to add Extra Cheese, Press Y for Yes and N for No ");
-          String extraC = sc.nextLine();
-
-          if(extraC.equalsIgnoreCase("Y")){
-              dsb.append("added Extra Cheese of 80 Rs \n");
-              dp.addExtraCheese();
-          }
-
-          //lets ask customer if they wants extra toppings
-          System.out.print("Do u like to add Extra Toppings, Press Y for Yes and N for No ");
-          String extraT = sc.nextLine();
-
-          if(extraT.equalsIgnoreCase("Y")){
-              if(check) dsb.append("added Extra Topping of 70 Rs \n");
-              else dsb.append("added Extra Topping of 120 Rs \n");
-              dp.addExtraToppings();
-          }
-
-          //lets ask customer if he wants to eat it here or take it away
-          System.out.print("Do u like to Eat it here or TakeAway, Press H for Here and T for Takeaway ");
-          String decide = sc.nextLine();
-
-          if(decide.equalsIgnoreCase("T")){
-              dsb.append("added Charges for Paper bag 20 Rs\n");
-              dp.addTakeaway();
-          }
-
-          //lets generate the bill
-          System.out.println(dsb+ "Your Final Bill is " + dp.getBill());
+          p = new DeluxePizza(check);
       }
+
+      //lets ask customer if they want extra Cheese or not
+      System.out.print("Do u like to add Extra Cheese - Y for Yes | N for No ");
+      if(sc.nextLine().equalsIgnoreCase("y")) p.addExtraCheese();
+
+          //lets ask customer if they want extra topping or not
+          System.out.print("Do u like to add Extra Topping - Y for Yes | N for No ");
+      if(sc.nextLine().equalsIgnoreCase("y")) p.addExtraToppings();
+
+          //takeaway or not
+          System.out.print("Do u like to Takeout the order - Y for Yes | N for No ");
+      if(sc.nextLine().equalsIgnoreCase("y")) p.addTakeaway();
+
+          System.out.print(p.getBill());
+
   }
 }
