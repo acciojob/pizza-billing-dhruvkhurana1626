@@ -24,6 +24,10 @@ public class Pizza {
         return this.price;
     }
 
+    public void setPrice(int price){
+        this.price = price;
+    }
+
     public void addExtraCheese() {
         if (!this.isCheeseAdded) {
             this.price += 80;
